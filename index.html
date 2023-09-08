@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bigocards</title>
+
+    <style>
+        
+        body {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            background-color: #da9c56;
+        }
+
+        .titulo {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 50px;
+            font-weight: 700;
+            color: #000000;
+            text-align: center;
+        }
+
+        .carta {
+            width: auto;
+            height: auto;
+            image-rendering: pixelated; /* Esto ayuda a mantener la calidad en imágenes pixeladas */
+            position: relative;
+            z-index: 1;
+        }
+
+        .carta:hover{
+            z-index: 2;            
+        }
+
+        .carta-img {
+            width: 250px;
+            height: auto;
+        }
+
+        .cartas-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que las cartas se envuelvan en filas */
+            gap: 20px; /* Espacio entre cartas */
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class = "titulo">
+        <img src="assets/Titulo.png" alt="Logo">
+    </div>
+
+    <div id="cartasContainer" class="cartas-container"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const cartasContainer = document.getElementById("cartasContainer");
+    
+    // Lista de cartas
+    const cartas = ["C.png","O.png","M.png","I.png","N.png","G.png","1.png","S.png","O.png","O.png","N.png","1.png","1.png","1.png","1.png"];
+    
+    for (const carta of cartas) {
+
+        const img = document.createElement("img");
+        img.src = `assets/${carta}`;
+        img.alt = `Carta ${carta}`;
+        img.classList.add("carta-img");
+
+        const cartaContainer = document.createElement("div");
+        cartaContainer.classList.add("carta");
+        cartaContainer.appendChild(img);
+        cartaContainer.setAttribute("data-tilt", "");
+        cartaContainer.setAttribute("data-tilt-glare", "");
+        cartaContainer.setAttribute("data-tilt-max-glare", "0.3");
+        cartaContainer.setAttribute("data-tilt-reverse", "true");
+        cartaContainer.setAttribute("data-tilt-scale", "1.3");
+
+        cartasContainer.appendChild(cartaContainer);
+    }
+    
+    VanillaTilt.init(document.querySelectorAll(".carta"), {
+        max: 25,
+        speed: 1000
+    });
+
+});
+
+    </script>
+    <script type="text/javascript" src="./tilt.js"></script>
+    <script type="text/javascript">
+        
+        VanillaTilt.init(document.querySelector(".carta"), {
+            max: 25,
+            speed: 400
+        });
+
+        VanillaTilt.init(document.querySelectorAll(".carta"));
+
+    </script>
+
+</body>
+
+</html>
